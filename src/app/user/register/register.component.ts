@@ -2,16 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
-import { NgxMaskDirective } from 'ngx-mask';
+import { AlertComponent } from '../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, InputComponent, NgxMaskDirective],
+  imports: [ReactiveFormsModule, CommonModule, InputComponent, AlertComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+
+  showAlert:boolean = false
+  alertMsg = ''
+  alertColor = ''
 
   name = new FormControl('',[
     Validators.required,
@@ -51,4 +55,11 @@ export class RegisterComponent {
     confirm_password: this.confirm_password,
     phoneNumber: this.phoneNumber
   })
+
+  register()
+  {
+    this.showAlert = true
+    this.alertColor = 'blue'
+    this.alertMsg = 'Please wait! Your account is being created.'
+  }
 }
