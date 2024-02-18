@@ -9,7 +9,7 @@ import { AlertComponent } from '../../shared/alert/alert.component';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, InputComponent, AlertComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
 
