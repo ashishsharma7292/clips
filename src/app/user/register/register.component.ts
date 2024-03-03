@@ -3,16 +3,18 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputComponent } from '../../shared/input/input.component';
 import { AlertComponent } from '../../shared/alert/alert.component';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, InputComponent, AlertComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
+  styleUrl: './register.component.css'
 })
 export class RegisterComponent {
 
+  constructor(private auth:AngularFireAuth){}
   showAlert:boolean = false
   alertMsg = ''
   alertColor = ''
@@ -56,10 +58,26 @@ export class RegisterComponent {
     phoneNumber: this.phoneNumber
   })
 
-  register()
+  async register()
   {
     this.showAlert = true
     this.alertColor = 'blue'
     this.alertMsg = 'Please wait! Your account is being created.'
+
+    const {email, password} = this.registerForm.value
+    
+    try
+    {
+      const userCred = await this.auth.createUserWithEmailAndPassword(email as string , password as string)
+
+      console.log(userCred)
+    }
+    catch(e)
+    {
+      console.error(e)
+    }
+
+    this.alertMsg = 'Success'
+    this.alertColor = 'green'
   }
 }

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavComponent } from './nav/nav.component';
 import { AuthModalComponent } from './user/auth-modal/auth-modal.component';
 import { CommonModule } from '@angular/common';
+import {AngularFireModule} from '@angular/fire/compat';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
     RouterOutlet,
     NavComponent,
     AuthModalComponent,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
